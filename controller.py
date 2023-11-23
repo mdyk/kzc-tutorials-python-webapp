@@ -1,13 +1,9 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from service import BlogService, Post
 
 app = FastAPI()
 
-
-class Post(BaseModel):
-    title: str
-    text: str
-    author: str
+blog_service = BlogService()
 
 
 # """
@@ -22,4 +18,4 @@ class Post(BaseModel):
 
 @app.post("/blog/post")
 def create_new_post(new_post: Post):
-    pass
+    blog_service.add_post(new_post)

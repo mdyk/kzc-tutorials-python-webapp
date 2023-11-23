@@ -1,7 +1,5 @@
 from pydantic import BaseModel
 
-POST_DB = {}
-
 
 class Post(BaseModel):
     id: str
@@ -11,5 +9,11 @@ class Post(BaseModel):
 
 
 class BlogService:
+    def __init__(self):
+        self.POST_DB = {}
+
     def add_post(self, new_post: Post) -> None:
-        POST_DB[new_post.id] = new_post
+        self.POST_DB[new_post.id] = new_post
+
+    def get_all_posts(self):
+        return self.POST_DB
